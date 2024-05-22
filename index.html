@@ -1,12 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Energy Manager</title>
+	<style>
+		html{
+			background-color: black;
+			color: white;
+		}
+		#poll{
+			display: none;
+		}
+		#pay{
+			display: none;
+		}
+	</style>
 </head>
 <body>
-    
+	<script>
+		function FormVisibility() {
+			var input = document.getElementById('choice');
+			var poll = document.getElementById('poll');
+			var pay = document.getElementById('pay');
+			if(input.value == "Pollution"){
+				poll.style.display = "block";
+				pay.style.display = "none";
+			} else if (input.value == "Pay") {
+				poll.style.display = "none";
+				pay.style.display = "block";
+			} else {
+				poll.style.display = "none";
+				pay.style.display = "none";
+			}
+		}
+		function Pollution(event) {
+			event.preventDefault();
+			var generatedPower = parseFloat(document.getElementById("generatedPower").value);
+			var powerGeneration = parseFloat(document.getElementById("powerGeneration").value);
+			var pollutionRate = parseFloat(document.getElementById("pollutionRate").value);
+			var targetIndex = parseFloat(document.getElementById("targetIndex").value);
+			var hToTarget = Math.round((targetIndex * (generatedPower * 1000)) / ((pollutionRate * powerGeneration) - (targetIndex * powerGeneration))/4*100)/100;
+			var dToTarget = Math.round((hToTarget/24)*100)/100;
+			document.getElementById('output').innerHTML = "<table><tr><td>Hours to target: </td><td>" + hToTarget + "</td></tr><tr><td>Days to target: </td><td>" + dToTarget + "</td></tr></table>";
+		}
+		function Payoff(event){
+			event.preventDefault();
+			var plantCost = parseFloat(document.getElementById("plantCost").value);
+			var energyProduction = parseFloat(document.getElementById("energyProduction").value);
+			var energyPrice = parseFloat(document.getElementById("energyPrice").value);
+			var fuelConsumption = parseFloat(document.getElementById("fuelConsumption").value);
+			var fuelCost = parseFloat(document.getElementById("fuelCost").value);
+			var hToPayOff = Math.round(plantCost / (4 * (energyPrice * energyProduction - fuelConsumption * fuelCost * energyProduction)))/100;
+			var dToPayOff = Math.round(hToPayOff/24*100)/100
+			document.getElementById('output').innerHTML = "<table><tr><td>Hours to pay off: </td><td>" + hToPayOff + "</td></tr><tr><td>Days to pay off: </td><td>" + dToPayOff + "</td></tr></table>";
+		}
+	</script>
+	<form action="post">
+		<h1>Choose Calculator</h1>
+		<select id="choice" onchange="FormVisibility()">
+			<option value="">---</option>
+			<option value="Pollution">Pollution Calculator</option>
+			<option value="Pay">Plant Pay Off calculator</option>
+		</select>
+	</form>
+	<form action="" method="POST" id="poll" onsubmit="Pollution(event)">
+		<h1>Pollution Caculator</h1>
+		<table>
+			<tr>
+				<td><label for="generatedPower">Lifetime Generated Power[GWh]:</label></td>
+				<td><input id="generatedPower" type="number" step="0.01" required></td>
+			</tr>
+			<tr>
+				<td><label for="powerGeneration">Power Generation[MW]:</label></td>
+				<td><input id="powerGeneration" type="number" step="0.01" required></td>
+			</tr>
+			<tr>
+				<td><label for="pollutionRate">Pollution Rate[<sup>g</sup>/<sub>MWh</sub>]: </label></td>
+				<td><input id="pollutionRate" type="number" required></td>
+			</tr>
+			<tr>
+				<td><label for="targetIndex">Target Index[<sup>g</sup>/<sub>MWh</sub>]:</label></td>
+				<td><input id="targetIndex" type="number" required></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Calculate</button></td>
+			</tr>
+		</table>
+	</form>
+	<form action="" method="POST" id="pay" onsubmit="Payoff(event)">
+		<h1>Plant Pay Off Calculator</h1>
+		<table>
+			<tr>
+				<td><label for="plantCost">Plant Price:</label></td>
+				<td><input id="plantCost" type="number" required></td>
+			</tr>
+			<tr>
+				<td><label for="fuelCost">Price of fuel[<sup>$</sup>/<sub>kg</sub>]:</label></td>
+				<td><input id="fuelCost" type="number" step="0.001" required></td>
+			</tr>
+			<tr>
+				<td><label for="energyProduction">Energy Production:</label></td>
+				<td><input id="energyProduction" type="number" step="0.01" required></td>
+			</tr>
+			<tr>
+				<td><label for="fuelConsumption">Fuel Consumption[<sup>kg</sup>/<sub>MWh</sub>]: </label></td>
+				<td><input id="fuelConsumption" type="number" step="" required></td>
+			</tr>
+			<tr>
+				<td><label for="energyPrice">Energy Price[<sup>$</sup>/<sub>MWh</sub>]:</label></td>
+				<td><input id="energyPrice" type="number" required></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Calculate</button></td>
+			</tr>
+		</table>
+		
+	</form>
+	<div id="output"></div>
 </body>
 </html>
