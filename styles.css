@@ -1,0 +1,10 @@
+html{
+    background-color: black;
+    color: white;
+}
+#poll{
+    display: none;
+}
+#pay{
+    display: none;
+}
