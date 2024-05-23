@@ -31,7 +31,7 @@ function Payoff(event){
     var energyPrice = parseFloat(document.getElementById("energyPrice").value);
     var fuelConsumption = parseFloat(document.getElementById("fuelConsumption").value);
     var fuelCost = parseFloat(document.getElementById("fuelCost").value);
-    var hToPayOff = Math.round(plantCost / (4 * (energyPrice * energyProduction - fuelConsumption * fuelCost * energyProduction)))/100;
-    var dToPayOff = Math.round(hToPayOff/24*100)/100
-    document.getElementById('output').innerHTML = "<table><tr><td>Hours to pay off: </td><td>" + hToPayOff + "</td></tr><tr><td>Days to pay off: </td><td>" + dToPayOff + "</td></tr></table>";
+    var hToPayOff = plantCost / (4 * (energyPrice * energyProduction - fuelConsumption * fuelCost * energyProduction));
+    var dToPayOff = hToPayOff/24;
+    document.getElementById('output').innerHTML = "<table><tr><td>Hours to pay off: </td><td>" + hToPayOff.toFixed(2) + "</td></tr><tr><td>Days to pay off: </td><td>" + dToPayOff.toFixed(2) + "</td></tr></table>";
 }
