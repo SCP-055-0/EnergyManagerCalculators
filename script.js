@@ -2,6 +2,7 @@ function FormVisibility() {
     var input = document.getElementById('choice');
     var poll = document.getElementById('poll');
     var pay = document.getElementById('pay');
+    document.getElementById('output').innerHTML = "";
     if(input.value == "Pollution"){
         poll.style.display = "block";
         pay.style.display = "none";
