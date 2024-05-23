@@ -21,8 +21,8 @@ function Pollution(event) {
     var pollutionRate = parseFloat(document.getElementById("pollutionRate").value);
     var targetIndex = parseFloat(document.getElementById("targetIndex").value);
     var hToTarget = (targetIndex * (generatedPower * 1000)) / ((pollutionRate * powerGeneration) - (targetIndex * powerGeneration))/4;
-    var dToTarget = Math.round((hToTarget/24)*100)/100;
-    document.getElementById('output').innerHTML = "<table><tr><td>Hours to target: </td><td>" + hToTarget + "</td></tr><tr><td>Days to target: </td><td>" + dToTarget + "</td></tr></table>";
+    var dToTarget = (hToTarget/24);
+    document.getElementById('output').innerHTML = "<table><tr><td>Hours to target: </td><td>" + hToTarget.toFixed(2) + "</td></tr><tr><td>Days to target: </td><td>" + dToTarget.toFixed(2) + "</td></tr></table>";
 }
 function Payoff(event){
     event.preventDefault();
