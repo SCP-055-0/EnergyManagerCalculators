@@ -45,9 +45,9 @@ function Payoff(event){
 }
 function Generation(event){
 	event.preventDefault();
-	const generation = parseFloat(document.getElementById("generation"));
-	const transformerLoss = parseFloat(document.getElementById("transformerLoss"));
-	var hPower = generation * ((100 - transformerLoss) / 100) * 4;
-	var dPower = hPower*24
-	document.getElementById('output').innerHTML = "<table><tr><td>Hourly power generation: </td><td>" + hPower.toFixed(2) + "MWh</td></tr><tr><td>Daily power generation: </td><td>" + dPower.toFixed(2) + "MWh</td></tr></table>";
+	const generation = parseFloat(document.getElementById("generation").value);
+	const transformerLoss = parseFloat(document.getElementById("transformerLoss").value);
+	var hPower = (generation * ((100 - transformerLoss) / 100)) * 4;
+	var dPower = hPower*24;
+	document.getElementById('output').innerHTML = "<table><tr><td>Hourly power generation: </td><td>" + hPower.toFixed(2) + " MWh</td></tr><tr><td>Daily power generation: </td><td>" + dPower.toFixed(2) + " MWh</td></tr></table>";
 }
