@@ -2,16 +2,24 @@ function FormVisibility() {
 	var input = document.getElementById('choice');
 	var poll = document.getElementById('poll');
 	var pay = document.getElementById('pay');
+	var generator = document.getElementById('generator');
 	document.getElementById('output').innerHTML = "";
 	if(input.value == "Pollution"){
 		poll.style.display = "block";
 		pay.style.display = "none";
+		generator.style.display = "none";
 	} else if (input.value == "Pay") {
 		poll.style.display = "none";
 		pay.style.display = "block";
+		generator.style.display = "none";
+	} else if (input.value == "Generator") {
+		poll.style.display = "none";
+		pay.style.display = "none";
+		generator.style.display = "block";
 	} else {
 		poll.style.display = "none";
 		pay.style.display = "none";
+		generator.style.display = "none";
 	}
 }
 function Pollution(event) {
