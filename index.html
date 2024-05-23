@@ -7,16 +7,23 @@
 	<link rel="stylesheet" type="text/css" href="https://rawcdn.githack.com/SCP-055-0/EnergyManagerCalculators/ea6c849442a914244a1cf41ff7f3c9619febb4f5/styles.css">
 </head>
 <body>
+<<<<<<< Updated upstream
 	<script src="">
 	</script>
 	<form action="post">
+=======
+	<script src="calculators.js"></script>
+	<script src="formLoad.js"></script>
+	<form action="" method="post">
+>>>>>>> Stashed changes
 		<h1>Choose Calculator</h1>
-		<select id="choice" onchange="FormVisibility()">
+		<select id="choice">
 			<option value="">---</option>
-			<option value="Pollution">Pollution Calculator</option>
-			<option value="Pay">Plant Pay Off calculator</option>
+			<option value="pollution">Pollution Calculator</option>
+			<option value="pay">Plant Pay Off Calculator</option>
 		</select>
 	</form>
+<<<<<<< Updated upstream
 	<form action="" method="POST" id="poll" onsubmit="Pollution(event)">
 		<h1>Pollution Caculator</h1>
 		<table>
@@ -69,6 +76,11 @@
 			</tr>
 		</table>
 		
+=======
+	<div id="formContainer">
+
+	</div>
+>>>>>>> Stashed changes
 	</form>
 	<div id="output"></div>
 </body>

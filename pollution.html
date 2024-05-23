@@ -1,0 +1,24 @@
+<form action="" method="POST" id="poll" onsubmit="Pollution(event)">
+    <h1>Pollution Caculator</h1>
+    <table>
+        <tr>
+            <td><label for="generatedPower">Lifetime Generated Power:</label></td>
+            <td><input id="generatedPower" type="number" step="0.01" required>GWh</td>
+        </tr>
+        <tr>
+            <td><label for="powerGeneration">Power Generation:</label></td>
+            <td><input id="powerGeneration" type="number" step="0.01" required>MW</td>
+        </tr>
+        <tr>
+            <td><label for="pollutionRate">Pollution Rate:</label></td>
+            <td><input id="pollutionRate" type="number" required><sup>g</sup>/<sub>MWh</sub></td>
+        </tr>
+        <tr>
+            <td><label for="targetIndex">Target Index:</label></td>
+            <td><input id="targetIndex" type="number" required><sup>g</sup>/<sub>MWh</sub></td>
+        </tr>
+        <tr>
+            <td><button type="submit">Calculate</button></td>
+        </tr>
+    </table>
+</form>
