@@ -20,7 +20,7 @@ function Pollution(event) {
     var powerGeneration = parseFloat(document.getElementById("powerGeneration").value);
     var pollutionRate = parseFloat(document.getElementById("pollutionRate").value);
     var targetIndex = parseFloat(document.getElementById("targetIndex").value);
-    var hToTarget = Math.round(((targetIndex * (generatedPower * 1000)) / ((pollutionRate * powerGeneration) - (targetIndex * powerGeneration))/4)*100)/100;
+    var hToTarget = (targetIndex * (generatedPower * 1000)) / ((pollutionRate * powerGeneration) - (targetIndex * powerGeneration))/4;
     var dToTarget = Math.round((hToTarget/24)*100)/100;
     document.getElementById('output').innerHTML = "<table><tr><td>Hours to target: </td><td>" + hToTarget + "</td></tr><tr><td>Days to target: </td><td>" + dToTarget + "</td></tr></table>";
 }
