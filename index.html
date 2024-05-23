@@ -68,6 +68,22 @@
 			</tr>
 		</table>
 	</form>
+	<form action="" method="post">
+		<h1>Power Generation Calculator</h1>
+		<table>
+		<tr>
+			<td><label for="generation">Power Generation:</label></td>
+			<td><input id="generation" type="number" step="0.01" required>MW</td>
+		</tr>
+		<tr>
+			<td><label for="transformerLoss">Transformer loss:</label></td>
+			<td><input id="transformerLoss" type="number" required>%</td>
+		</tr>
+		<tr>
+			<td><button type="submit">Calculate</button></td>
+		</tr>
+	</table>
+	</form>
 	<div id="output"></div>
 </body>
 </html>
