@@ -81,7 +81,7 @@ function Generation(event){
 		<tr>
 			<td>`;
 		if(document.getElementById("ful").value != ""){
-			const hGin = generation * parseFloat(document.getElementById("ful").value);
+			const hGin = generation * parseFloat(document.getElementById("ful").value) * 4;
 			const hFuel = formulateUnits(hGin, "notPower");
 			const tFuel = formulateUnits((hGin * 12), "notPower");
 			const dFuel = formulateUnits((hGin * 24), "notPower");
@@ -95,7 +95,7 @@ function Generation(event){
 			<td>`;
 		}
 		if(document.getElementById("pol").value != ""){
-			const hGon = generation * document.getElementById("pol").value;
+			const hGon = generation * document.getElementById("pol").value * 4;
 			const hPol = formulateUnits(hGon, "notPower");
 			const tPol = formulateUnits((hGon * 12), "notPower");
 			const dPol = formulateUnits((hGon * 24), "notPower");
