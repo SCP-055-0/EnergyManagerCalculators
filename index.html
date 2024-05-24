@@ -81,6 +81,14 @@
 			<td><input id="transformerLoss" type="number" required oninput="Generation(event)">%</td>
 		</tr>
 		<tr>
+			<td><label for="ful">Fuel Consumption(optional):</label></td>
+			<td><input id="ful" type="number" oninput="Generation(event)"><sup>kg</sup>/<sub>MWh</sub></td>
+		</tr>
+		<tr>
+			<td><label for="pol">Pollution(optional):</label></td>
+			<td><input id="pol" type="number" oninput="Generation(event)"><sup>g</sup>/<sub>MWh</sub></td>
+		</tr>
+		<tr>
 			<td><button type="submit">Calculate</button></td>
 		</tr>
 	</table>

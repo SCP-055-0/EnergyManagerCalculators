@@ -56,24 +56,82 @@ function Generation(event){
 		const hPower = formulateUnits(hGen,"power");
 		const tPower = formulateUnits((hGen * 12),"power");
 		const dPower = formulateUnits((hGen * 24),"power");
-		const hHydro = formulateUnits((hGen / 3.03),"hydrogen");
-		const tHydro = formulateUnits((hGen * 12 / 3.03),"hydrogen");
-		const dHydro = formulateUnits((hGen * 24 / 3.03),"hydrogen");
-		document.getElementById('output').innerHTML = "<table><tr><td><table><tr><td>Hourly Power Generation: </td><td>" + hPower[0].toFixed(2) + " " + hPower[1] + "</td></tr><tr><td>Full Tank Generation(12h): </td><td>" + tPower[0].toFixed(2) + " " + tPower[1] + "</td></tr><tr><td>Daily Power Generation: </td><td>" + dPower[0].toFixed(2) + " " + dPower[1] + "</td></tr></table></td><td><table><tr><td>Hourly Hydrogen Generation: </td><td>" + hHydro[0].toFixed(2) + " " + hHydro[1] + "</td></tr><tr><td>Full Tank Generation(12h): </td><td>" + tHydro[0].toFixed(2) + " " + tHydro[1] + "</td></tr><tr><td>Daily Hydrogen Generation: </td><td>" + dHydro[0].toFixed(2) + " " + dHydro[1] + "</td></tr></table></td></tr></table>";
+		const hHydro = formulateUnits((hGen / 3.03),"notPower");
+		const tHydro = formulateUnits((hGen * 12 / 3.03),"notPower");
+		const dHydro = formulateUnits((hGen * 24 / 3.03),"notPower");
+		document.getElementById('output').innerHTML = "";
+		var tableOfTables = `
+		<table>
+		<tr>
+			<td>
+				<table>
+					<tr><td>Hourly Power Generation: </td><td>${hPower[0].toFixed(2)} ${hPower[1]}</td></tr>
+					<tr><td>Full Tank Generation(12h): </td><td>${tPower[0].toFixed(2)} ${tPower[1]}</td></tr>
+					<tr><td>Daily Power Generation: </td><td>${dPower[0].toFixed(2)} ${dPower[1]}</td></tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr><td>Hourly Hydrogen Generation: </td><td>${hHydro[0].toFixed(2)} ${hHydro[1]}</td></tr>
+					<tr><td>Full Tank Generation(12h): </td><td>${tHydro[0].toFixed(2)} ${tHydro[1]}</td></tr>
+					<tr><td>Daily Hydrogen Generation: </td><td>${dHydro[0].toFixed(2)} ${dHydro[1]}</td></tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>`;
+		if(document.getElementById("ful").value != ""){
+			const hGin = generation * parseFloat(document.getElementById("ful").value);
+			const hFuel = formulateUnits(hGin, "notPower");
+			const tFuel = formulateUnits((hGin * 12), "notPower");
+			const dFuel = formulateUnits((hGin * 24), "notPower");
+			tableOfTables += `
+			<table>
+				<tr><td>Fuel Consumption per Hour: </td><td>${hFuel[0].toFixed(2)} ${hFuel[1]}</td></tr>
+				<tr><td>Fuel Consumption per Tank(12h): </td><td>${tFuel[0].toFixed(2)} ${tFuel[1]}</td></tr>
+				<tr><td>Fuel Consumption per Day: </td><td>${dFuel[0].toFixed(2)} ${dFuel[1]}</td></tr>	
+			</table>
+			</td>
+			<td>`;
+		}
+		if(document.getElementById("pol").value != ""){
+			const hGon = generation * document.getElementById("pol").value;
+			const hPol = formulateUnits(hGon, "notPower");
+			const tPol = formulateUnits((hGon * 12), "notPower");
+			const dPol = formulateUnits((hGon * 24), "notPower");
+			tableOfTables += `
+			<table>
+				<tr><td>Pollution per Hour: </td><td>${hPol[0].toFixed(2)} ${hPol[1]}</td></tr>
+				<tr><td>Pollution per Tank(12h): </td><td>${tPol[0].toFixed(2)} ${tPol[1]}</td></tr>
+				<tr><td>Pollution per Day: </td><td>${dPol[0].toFixed(2)} ${dPol[1]}</td></tr>
+			</table>
+			</td>
+			<td>`;
+		}
+		tableOfTables += `
+		</td></tr></table>
+		`;
+		document.getElementById('output').insertAdjacentHTML('afterbegin', tableOfTables);
 	}
 }
 function formulateUnits(power, mode){
 	switch (mode) {
 		case "power":
-			if(power >= 1000){
+			if(power >= 1000000){
+				var unit = "TWh";
+				power /= 1000000;
+			} else if(power >= 1000){
 				var unit = "GWh";
 				power /= 1000;
 			} else {
 				var unit = "MWh";
 			}
 			break;
-		case "hydrogen":
-			if(power >= 1000){
+		case "notPower":
+			if(power >= 1000000){
+				var unit = "kt";
+				power /= 1000000;
+			} else if(power >= 1000){
 				var unit = "t";
 				power /= 1000;
 			} else {
