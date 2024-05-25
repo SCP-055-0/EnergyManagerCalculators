@@ -1,13 +1,13 @@
-html{
-    background-color: black;
-    color: white;
+.dark{
+	background-color: black;
+	color: white;
 }
 #poll{
-    display: none;
+	display: none;
 }
 #pay{
-    display: none;
+	display: none;
 }
 #generator{
-    display: none;
+	display: none;
 }

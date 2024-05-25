@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,7 +89,16 @@
 			<td><input id="pol" type="number" oninput="Generation(event)"><sup>g</sup>/<sub>kWh</sub></td>
 		</tr>
 		<tr>
-			<td><button type="submit">Calculate</button></td>
+			<td><label for="targetPower">Target Energy/Hydrogen(optional):</label></td>
+			<td><input id="targetPower" type="number" oninput="Generation(event)">
+				<select name="hydroEnergy" id="hE" class="dark" onchange="Generation(event)">
+				<option value="">---</option>
+				<option value="energy">MWh</option>
+				<option value="hydrogen">t</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td><button type="submit" class="dark">Calculate</button></td>
 		</tr>
 	</table>
 	</form>

@@ -112,6 +112,43 @@ function Generation(event){
 		</td></tr></table>
 		`;
 		document.getElementById('output').insertAdjacentHTML('afterbegin', tableOfTables);
+		if(document.getElementById("targetPower").value != "") {
+			const genToTarget = document.getElementById("targetPower").value / hGen;
+			var tabl = `
+			<table>
+				<tr>`;
+			switch(document.getElementById("hE").value){
+				case "energy":
+					tabl += `
+							<td>Hours to target</td>
+							<td>${(genToTarget).toFixed(2)}</td>
+						</tr>
+						<tr>
+							<td>Days to target</td>
+							<td>${(genToTarget/24).toFixed(2)}</td>
+						</tr>
+					</table>`;
+					break;
+				case "hydrogen":
+					tabl += `
+							<td>Hours to target</td>
+							<td>${(genToTarget*3.03).toFixed(2)}</td>
+						</tr>
+						<tr>
+							<td>Days to target</td>
+							<td>${(genToTarget/24*3.03).toFixed(2)}</td>
+						</tr>
+					</table>`;
+					break;
+				default:
+					break;
+			}
+			tabl += `<td></td>
+					<td></td>
+				</tr>
+			</table>`;
+			document.getElementById("output").insertAdjacentHTML('beforeend',tabl)
+		}
 	}
 }
 function formulateUnits(power, mode){
