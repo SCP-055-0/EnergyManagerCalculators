@@ -53,12 +53,13 @@ function Generation(event){
 		const generation = parseFloat(document.getElementById("generation").value);
 		const transformerLoss = parseFloat(document.getElementById("transformerLoss").value);
 		const hGen = (generation * (1 - transformerLoss / 100)) * 4;
+		const hydroHour = hGen * 30.3;
 		const hPower = formulateUnits(hGen,"power");
 		const tPower = formulateUnits((hGen * 12),"power");
 		const dPower = formulateUnits((hGen * 24),"power");
-		const hHydro = formulateUnits((hGen * 3.03),"notPower");
-		const tHydro = formulateUnits((hGen * 12 * 3.03),"notPower");
-		const dHydro = formulateUnits((hGen * 24 * 3.03),"notPower");
+		const hHydro = formulateUnits(hydroHour,"notPower");
+		const tHydro = formulateUnits((hydroHour * 12),"notPower");
+		const dHydro = formulateUnits((hydroHour * 24),"notPower");
 		document.getElementById('output').innerHTML = "";
 		var tableOfTables = `
 		<table>
@@ -114,6 +115,7 @@ function Generation(event){
 		document.getElementById('output').insertAdjacentHTML('afterbegin', tableOfTables);
 		if(document.getElementById("targetPower").value != "") {
 			const genToTarget = document.getElementById("targetPower").value / hGen;
+			const genToTargetHydro = (document.getElementById("targetPower").value * 1000) / hydroHour;
 			var tabl = `
 			<table>
 				<tr>`;
@@ -132,20 +134,18 @@ function Generation(event){
 				case "hydrogen":
 					tabl += `
 							<td>Hours to target</td>
-							<td>${(genToTarget*3.03).toFixed(2)}</td>
+							<td>${(genToTargetHydro).toFixed(2)}</td>
 						</tr>
 						<tr>
 							<td>Days to target</td>
-							<td>${(genToTarget/24*3.03).toFixed(2)}</td>
+							<td>${(genToTargetHydro/24).toFixed(2)}</td>
 						</tr>
 					</table>`;
 					break;
 				default:
 					break;
 			}
-			tabl += `<td></td>
-					<td></td>
-				</tr>
+			tabl += `</tr>
 			</table>`;
 			document.getElementById("output").insertAdjacentHTML('beforeend',tabl)
 		}
