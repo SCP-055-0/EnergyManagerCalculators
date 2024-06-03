@@ -56,9 +56,9 @@ function Generation(event){
 		const hPower = formulateUnits(hGen,"power");
 		const tPower = formulateUnits((hGen * 12),"power");
 		const dPower = formulateUnits((hGen * 24),"power");
-		const hHydro = formulateUnits((hGen / 3.03),"notPower");
-		const tHydro = formulateUnits((hGen * 12 / 3.03),"notPower");
-		const dHydro = formulateUnits((hGen * 24 / 3.03),"notPower");
+		const hHydro = formulateUnits((hGen * 3.03),"notPower");
+		const tHydro = formulateUnits((hGen * 12 * 3.03),"notPower");
+		const dHydro = formulateUnits((hGen * 24 * 3.03),"notPower");
 		document.getElementById('output').innerHTML = "";
 		var tableOfTables = `
 		<table>
